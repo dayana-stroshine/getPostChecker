@@ -15,7 +15,7 @@ app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
 // Set port for code to be run on
-app.set('port', 3000);
+app.set('port', 4306);
 
 // GET implementation *** THIS CODE IS INFLUENCED BY LECTURE CODE ***
 // First I create a GET route to the home of the page since I will
