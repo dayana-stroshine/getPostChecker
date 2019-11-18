@@ -6,7 +6,7 @@ var app = express();
 var handlebars = require('express-handlebars').create({ defaultLayout: 'main' });
 var bodyParser = require('body-parser');
 
-// Allow bodyParser to use form or JSON data
+// Allow bodyParser to use URL encoded query string or JSON data
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -23,20 +23,24 @@ app.get('/', function (req, res) {
   // I initialize the qParams array which will store the objects
   // containing the names and values of the GET requests
   var qParams = [];
+
   // Then I loop through every string in the GET request and
   // save it as an object to the qParams array
   for (var p in req.query) {
     qParams.push({ 'name': p, 'value': req.query[p] })
   }
+
   // As in the lecture, this is for debugging purposes, so that
   // I know that the GET requests were received and stored
   console.log(qParams);
   console.log(req.query);
+
   // I create a context object and save the qParams array
   // to a data member of context called dataList. This dataList
   // will be referred to in the views
   var context = {};
   context.dataList = qParams;
+  
   // Lastly I render the doGet view and pass it the context object
   res.render('doGet', context);
 });
@@ -56,7 +60,7 @@ app.post('/', function (req, res) {
 
   var context = {};
   context.dataList = qParams;
-  
+
   res.render('doPost', context);
 });
 
