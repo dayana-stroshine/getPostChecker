@@ -17,7 +17,6 @@ app.set('view engine', 'handlebars');
 // Set port for code to be run on
 app.set('port', 4306);
 
-// GET implementation *** THIS CODE IS INFLUENCED BY LECTURE CODE ***
 // First I create a GET route to the home of the page since I will
 // not need multiple pages for this application
 app.get('/', function (req, res) {
@@ -42,19 +41,22 @@ app.get('/', function (req, res) {
   res.render('doGet', context);
 });
 
-// POST implementation *** THIS CODE IS INFLUENCED BY LECTURE CODE ***
-// The implementation is the same as in the GET implementation except
+// The POST implementation is the same as in the GET implementation except
 // I call app.post() and the POST requests are accessed with req.body
 // instead of req.query
 app.post('/', function (req, res) {
   var qParams = [];
+
   for (var p in req.body) {
     qParams.push({ 'name': p, 'value': req.body[p] })
   }
+
   console.log(qParams);
   console.log(req.body);
+
   var context = {};
   context.dataList = qParams;
+  
   res.render('doPost', context);
 });
 
