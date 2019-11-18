@@ -20,26 +20,26 @@ app.set('port', 4306);
 // First I create a GET route to the home of the page since I will
 // not need multiple pages for this application
 app.get('/', function (req, res) {
-  // I initialize the qParams array which will store the objects
-  // containing the names and values of the GET requests
-  var qParams = [];
+  // I initialize the queryStringParams array which will store the objects
+  // containing the names and values of the GET requests query string
+  var queryStringParams = [];
 
   // Then I loop through every string in the GET request and
-  // save it as an object to the qParams array
+  // save it as an object to the queryStringParams array
   for (var p in req.query) {
-    qParams.push({ 'name': p, 'value': req.query[p] })
+    queryStringParams.push({ 'name': p, 'value': req.query[p] })
   }
 
   // As in the lecture, this is for debugging purposes, so that
   // I know that the GET requests were received and stored
-  console.log(qParams);
+  console.log(queryStringParams);
   console.log(req.query);
 
-  // I create a context object and save the qParams array
+  // I create a context object and save the queryStringParams array
   // to a data member of context called dataList. This dataList
   // will be referred to in the views
   var context = {};
-  context.dataList = qParams;
+  context.dataList = queryStringParams;
   
   // Lastly I render the doGet view and pass it the context object
   res.render('doGet', context);
@@ -49,17 +49,17 @@ app.get('/', function (req, res) {
 // I call app.post() and the POST requests are accessed with req.body
 // instead of req.query
 app.post('/', function (req, res) {
-  var qParams = [];
+  var queryStringParams = [];
 
   for (var p in req.body) {
-    qParams.push({ 'name': p, 'value': req.body[p] })
+    queryStringParams.push({ 'name': p, 'value': req.body[p] })
   }
 
-  console.log(qParams);
+  console.log(queryStringParams);
   console.log(req.body);
 
   var context = {};
-  context.dataList = qParams;
+  context.dataList = queryStringParams;
 
   res.render('doPost', context);
 });
